@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | CampusConnect</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="css/style.css?v=20261014_3" rel="stylesheet">
+  <script>
+    (function() {
+      try {
+        const theme = localStorage.getItem("campusconnect_theme") || "light";
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.setAttribute("data-bs-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- Tech Stack Top Strip -->
+  <div class="tech-stack-strip">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-none d-md-block">
+        <span class="tech-pill"><i class="bi bi-code-slash text-warning"></i> HTML5</span>
+        <span class="tech-pill"><i class="bi bi-palette text-info"></i> CSS3</span>
+        <span class="tech-pill active-php"><i class="bi bi-filetype-php"></i> PHP 8.2</span>
+        <span class="tech-pill"><i class="bi bi-filetype-js text-warning"></i> JavaScript</span>
+        <span class="tech-pill active-ng"><i class="bi bi-shield-shaded"></i> AngularJS 1.8</span>
+        <span class="tech-pill active-sql"><i class="bi bi-database"></i> Database (SQL)</span>
+      </div>
+      <div class="ms-auto">
+        <span class="db-live-indicator">Checking Database...</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-campus sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="admin.html">
+        <span class="d-inline-flex align-items-center me-1">
+          <i class="bi bi-mortarboard-fill text-primary fs-5"></i>
+        </span>
+        <span>Campus</span>Connect <span class="brand-badge bg-danger text-white">ADMIN</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navMain">
+        <div class="ms-auto d-flex align-items-center gap-2 flex-wrap">
+          <a href="index.html" class="nav-link"><i class="bi bi-house me-1"></i>Portal</a>
+          <a href="cesa.html" class="nav-link"><i class="bi bi-stars me-1"></i>CESA Hub</a>
+          <a href="events.html" class="nav-link"><i class="bi bi-lightning-charge me-1"></i>Events</a>
+          <a href="dashboard.html" class="nav-link"><i class="bi bi-speedometer2 me-1"></i>Student View</a>
+          <a href="db_status.html" class="nav-link"><i class="bi bi-database me-1"></i>Database</a>
+          <a class="nav-link text-danger fw-semibold" href="#" onclick="Auth.logout()"><i class="bi bi-box-arrow-right me-1"></i>Logout</a>
+          <button class="theme-toggle-btn" title="Toggle theme"><i class="bi bi-moon-stars-fill"></i></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Modern Admin Control Center Header -->
+  <section class="py-4" style="background: linear-gradient(180deg, var(--accent-soft) 0%, transparent 100%);">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>
+          <div class="d-inline-flex align-items-center gap-2 mb-2">
+            <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-3 py-1 fw-bold">
+              <i class="bi bi-shield-lock-fill me-1"></i> CESA Admin Command Center
+            </span>
+            <span class="badge bg-success-subtle text-success rounded-pill px-2 py-1 small">
+              <i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i> System Live
+            </span>
+          </div>
+          <h2 class="section-title mb-1">Administrative Control Center</h2>
+          <p class="text-muted mb-0 small">Manage CESA activities, seminars, executive committee, announcements, and registrations.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <a href="../api/setup_db.php" target="_blank" class="btn btn-outline-primary btn-sm rounded-pill px-3 shadow-sm">
+            <i class="bi bi-arrow-repeat me-1"></i> Sync DB
+          </a>
+          <button class="btn btn-primary-custom btn-sm rounded-pill px-3 shadow-sm" onclick="showAddEvent('cesa')">
+            <i class="bi bi-plus-circle me-1"></i> Add Event
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding py-4">
+    <div class="container">
+      <!-- Modern Stats Cards -->
+      <div class="row g-3 mb-4" id="admin-stats">
+        <div class="col-6 col-md-3">
+          <div class="dash-stat-tile">
+            <div class="dash-stat-icon-wrap dash-stat-icon-blue">
+              <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="dash-stat-info">
+              <div class="dash-stat-value text-primary" id="a-students">1</div>
+              <div class="dash-stat-tag">Verified Students</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="dash-stat-tile">
+            <div class="dash-stat-icon-wrap dash-stat-icon-purple">
+              <i class="bi bi-stars"></i>
+            </div>
+            <div class="dash-stat-info">
+              <div class="dash-stat-value text-info" id="a-cesa">3</div>
+              <div class="dash-stat-tag">CESA Events</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="dash-stat-tile">
+            <div class="dash-stat-icon-wrap dash-stat-icon-amber">
+              <i class="bi bi-easel-fill"></i>
+            </div>
+            <div class="dash-stat-info">
+              <div class="dash-stat-value text-warning" id="a-sem">2</div>
+              <div class="dash-stat-tag">Seminars</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="dash-stat-tile">
+            <div class="dash-stat-icon-wrap dash-stat-icon-green">
+              <i class="bi bi-ticket-perforated-fill"></i>
+            </div>
+            <div class="dash-stat-info">
+              <div class="dash-stat-value text-success" id="a-regs">2</div>
+              <div class="dash-stat-tag">Total Registrations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modern Admin Tabs Navigation -->
+      <div class="admin-nav-tabs" id="adminTabs">
+        <button class="nav-link admin-tab-btn active fw-bold" data-tab="cesa"><i class="bi bi-calendar-event me-1"></i> CESA Events</button>
+        <button class="nav-link admin-tab-btn fw-bold" data-tab="seminars"><i class="bi bi-easel me-1"></i> Seminars</button>
+        <button class="nav-link admin-tab-btn fw-bold" data-tab="events"><i class="bi bi-trophy me-1"></i> University Fests</button>
+        <button class="nav-link admin-tab-btn fw-bold" data-tab="committee"><i class="bi bi-person-lines-fill me-1"></i> Committee</button>
+        <button class="nav-link admin-tab-btn fw-bold" data-tab="announcements"><i class="bi bi-megaphone me-1"></i> Announcements</button>
+        <button class="nav-link admin-tab-btn fw-bold" data-tab="students"><i class="bi bi-people me-1"></i> RSVPs &amp; Students</button>
+      </div>
+
+      <!-- CESA Tab -->
+      <div id="tab-cesa" class="admin-tab">
+        <div class="d-flex justify-content-between mb-3 align-items-center">
+          <h5 class="fw-bold mb-0">CESA Events</h5>
+          <button class="btn btn-primary-custom btn-sm" onclick="showAddEvent('cesa')">+ Add CESA Event</button>
+        </div>
+        <div class="card card-modern p-0">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light"><tr><th>Title</th><th>Date</th><th>Category</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="admin-cesa-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seminars Tab -->
+      <div id="tab-seminars" class="admin-tab" style="display:none;">
+        <div class="d-flex justify-content-between mb-3 align-items-center">
+          <h5 class="fw-bold mb-0">Seminars &amp; Masterclasses</h5>
+          <button class="btn btn-primary-custom btn-sm" onclick="showAddEvent('seminar')">+ Add Seminar</button>
+        </div>
+        <div class="card card-modern p-0">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light"><tr><th>Title</th><th>Speaker</th><th>Date</th><th>Organized By</th><th>Actions</th></tr></thead>
+              <tbody id="admin-sem-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- General Events Tab -->
+      <div id="tab-events" class="admin-tab" style="display:none;">
+        <div class="d-flex justify-content-between mb-3 align-items-center">
+          <h5 class="fw-bold mb-0">General University Fests</h5>
+          <button class="btn btn-primary-custom btn-sm" onclick="showAddEvent('general')">+ Add University Event</button>
+        </div>
+        <div class="card card-modern p-0">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light"><tr><th>Title</th><th>Date</th><th>Category</th><th>Host</th><th>Actions</th></tr></thead>
+              <tbody id="admin-events-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Committee Tab -->
+      <div id="tab-committee" class="admin-tab" style="display:none;">
+        <div class="d-flex justify-content-between mb-3 align-items-center">
+          <h5 class="fw-bold mb-0">CESA Executive Committee</h5>
+          <button class="btn btn-primary-custom btn-sm" onclick="showAddCommittee()">+ Add Member</button>
+        </div>
+        <div class="card card-modern p-0">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light"><tr><th>Name</th><th>Position</th><th>Department</th><th>Year</th><th>Actions</th></tr></thead>
+              <tbody id="admin-committee-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Announcements Tab -->
+      <div id="tab-announcements" class="admin-tab" style="display:none;">
+        <div class="d-flex justify-content-between mb-3 align-items-center">
+          <h5 class="fw-bold mb-0">Announcements</h5>
+          <button class="btn btn-primary-custom btn-sm" onclick="showAddAnnouncement()">+ Post Notice</button>
+        </div>
+        <div class="card card-modern p-0">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light"><tr><th>Title</th><th>Date</th><th>Labels</th><th>Author</th><th>Actions</th></tr></thead>
+              <tbody id="admin-ann-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Students Tab -->
+      <div id="tab-students" class="admin-tab" style="display:none;">
+        <h5 class="fw-bold mb-3">Registered Students &amp; RSVPs</h5>
+        <div class="card card-modern p-0 mb-4">
+          <div class="p-3 border-bottom"><h6 class="fw-bold mb-0">Event Registrations Log</h6></div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light"><tr><th>Ticket ID</th><th>Student Name</th><th>IU Number</th><th>Event ID</th><th>Registered At</th></tr></thead>
+              <tbody id="admin-regs-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Add Event Modal -->
+  <div class="modal fade" id="addEventModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow-xl" style="border-radius: var(--radius-lg); overflow: hidden; background: var(--card-bg);">
+        <div class="modal-header text-white" style="background: var(--primary-gradient);">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-calendar-plus-fill fs-5"></i>
+            <h5 class="modal-title fw-bold mb-0" id="addEventModalTitle">Add New Event</h5>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <input type="hidden" id="ae-type">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label small fw-bold">Event Title</label>
+              <input type="text" class="form-control" id="ae-title" required placeholder="e.g. AI Prompting Hackathon">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">Event Date</label>
+              <input type="date" class="form-control" id="ae-date" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">Time Window</label>
+              <input type="text" class="form-control" id="ae-time" placeholder="10:00 AM – 04:00 PM">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">Campus Venue / Lab</label>
+              <input type="text" class="form-control" id="ae-venue" placeholder="e.g. Computer Lab 2, Indus Campus">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">Event Category</label>
+              <select class="form-select" id="ae-category">
+                <option>Competition</option>
+                <option>Workshop</option>
+                <option>Seminar</option>
+                <option>Technical</option>
+                <option>Cultural</option>
+                <option>Sports</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-bold">Brief Description &amp; Syllabus</label>
+              <textarea class="form-control" id="ae-desc" rows="3" placeholder="Provide complete event details..."></textarea>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">Organizing Wing</label>
+              <input type="text" class="form-control" id="ae-org" value="CESA">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">Status Flag</label>
+              <select class="form-select" id="ae-status">
+                <option value="upcoming">upcoming</option>
+                <option value="ongoing">ongoing</option>
+                <option value="completed">completed</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer bg-light border-top">
+          <button class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary-custom rounded-pill px-4 shadow-sm" onclick="saveEvent()">
+            <i class="bi bi-check-circle me-1"></i> Save Event
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2026 CampusConnect &bull; Indus University &bull; Admin Management</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Auto authenticate demo admin if visiting
+      if (!Auth.isAdmin()) {
+        const adminUser = { role: "admin", email: "admin@indus", name: "CESA Administrator" };
+        Storage.set("currentUser", adminUser);
+      }
+      refreshAdmin();
+
+      document.querySelectorAll("#adminTabs .nav-link").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll("#adminTabs .nav-link").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          document.querySelectorAll(".admin-tab").forEach(t => t.style.display = "none");
+          document.getElementById("tab-" + btn.dataset.tab).style.display = "block";
+        });
+      });
+    });
+
+    function refreshAdmin() {
+      const cesa = Storage.get("cesaEvents", []);
+      const sem = Storage.get("seminars", []);
+      const gen = Storage.get("generalEvents", []);
+      const students = Storage.get("students", []);
+      const regs = Storage.get("registrations", []);
+      const committee = Storage.get("committee", []);
+      const anns = Storage.get("announcements", []);
+
+      document.getElementById("a-students").textContent = students.length;
+      document.getElementById("a-cesa").textContent = cesa.length;
+      document.getElementById("a-sem").textContent = sem.length;
+      document.getElementById("a-regs").textContent = regs.length;
+
+      // CESA Table
+      document.getElementById("admin-cesa-table").innerHTML = cesa.map(e => `
+        <tr>
+          <td><strong>${e.title}</strong></td>
+          <td>${UI.formatDate(e.date)}</td>
+          <td>${UI.categoryBadge(e.category)}</td>
+          <td>${UI.statusBadge(e.status)}</td>
+          <td><button class="btn btn-sm btn-outline-danger" onclick="deleteItem('cesaEvents','${e.id}')"><i class="bi bi-trash"></i></button></td>
+        </tr>`).join("");
+
+      // Seminars Table
+      document.getElementById("admin-sem-table").innerHTML = sem.map(s => `
+        <tr>
+          <td><strong>${s.title}</strong></td>
+          <td>${s.speaker || "Expert"}</td>
+          <td>${UI.formatDate(s.date)}</td>
+          <td><span class="badge bg-secondary">${s.organizedBy}</span></td>
+          <td><button class="btn btn-sm btn-outline-danger" onclick="deleteItem('seminars','${s.id}')"><i class="bi bi-trash"></i></button></td>
+        </tr>`).join("");
+
+      // General Table
+      document.getElementById("admin-events-table").innerHTML = gen.map(g => `
+        <tr>
+          <td><strong>${g.title}</strong></td>
+          <td>${UI.formatDate(g.date)}</td>
+          <td>${UI.categoryBadge(g.category)}</td>
+          <td>${g.organizedBy}</td>
+          <td><button class="btn btn-sm btn-outline-danger" onclick="deleteItem('generalEvents','${g.id}')"><i class="bi bi-trash"></i></button></td>
+        </tr>`).join("");
+
+      // Committee Table
+      document.getElementById("admin-committee-table").innerHTML = committee.map(c => `
+        <tr>
+          <td><strong>${c.name}</strong></td>
+          <td><span class="badge bg-primary">${c.position}</span></td>
+          <td>${c.department}</td>
+          <td>${c.year}</td>
+          <td><button class="btn btn-sm btn-outline-danger" onclick="deleteItem('committee','${c.id}')"><i class="bi bi-trash"></i></button></td>
+        </tr>`).join("");
+
+      // Announcements Table
+      document.getElementById("admin-ann-table").innerHTML = anns.map(a => `
+        <tr>
+          <td><strong>${a.title}</strong></td>
+          <td>${UI.formatDate(a.date)}</td>
+          <td>${(a.labels || []).join(", ")}</td>
+          <td>${a.author || "CESA Team"}</td>
+          <td><button class="btn btn-sm btn-outline-danger" onclick="deleteItem('announcements','${a.id}')"><i class="bi bi-trash"></i></button></td>
+        </tr>`).join("");
+
+      // Registrations Table
+      document.getElementById("admin-regs-table").innerHTML = regs.map(r => `
+        <tr>
+          <td><code>${r.id}</code></td>
+          <td><strong>${r.studentName}</strong></td>
+          <td>${r.iuNumber}</td>
+          <td><span class="badge bg-secondary">${r.eventId}</span></td>
+          <td>${UI.formatDate(r.registeredAt)}</td>
+        </tr>`).join("");
+    }
+
+    const eventModal = new bootstrap.Modal(document.getElementById("addEventModal"));
+
+    function showAddEvent(type) {
+      document.getElementById("ae-type").value = type;
+      document.getElementById("addEventModalTitle").textContent = type === "cesa" ? "Add CESA Event" : (type === "seminar" ? "Add Seminar" : "Add University Event");
+      document.getElementById("ae-org").value = type === "cesa" ? "CESA" : (type === "seminar" ? "Department" : "Indus University");
+      eventModal.show();
+    }
+
+    function saveEvent() {
+      const type = document.getElementById("ae-type").value;
+      const key = type === "cesa" ? "cesaEvents" : (type === "seminar" ? "seminars" : "generalEvents");
+      const list = Storage.get(key, []);
+      const newEv = {
+        id: "ev" + Date.now(),
+        title: document.getElementById("ae-title").value,
+        date: document.getElementById("ae-date").value || new Date().toISOString().slice(0, 10),
+        time: document.getElementById("ae-time").value || "10:00 AM",
+        venue: document.getElementById("ae-venue").value || "Campus",
+        category: document.getElementById("ae-category").value,
+        description: document.getElementById("ae-desc").value,
+        organizer: document.getElementById("ae-org").value,
+        organizedBy: document.getElementById("ae-org").value,
+        status: document.getElementById("ae-status").value,
+        posterImage: "posters/codesprint.jpg",
+        registrationOpen: true
+      };
+      list.push(newEv);
+      Storage.set(key, list);
+      eventModal.hide();
+      UI.showToast("Event created successfully!");
+      refreshAdmin();
+    }
+
+    function deleteItem(key, id) {
+      if (!confirm("Are you sure you want to remove this item?")) return;
+      let list = Storage.get(key, []);
+      list = list.filter(item => String(item.id) !== String(id));
+      Storage.set(key, list);
+      UI.showToast("Item deleted.");
+      refreshAdmin();
+    }
+  </script>
+</body>
+</html>

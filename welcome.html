@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to CampusConnect | Indus University &bull; CESA 2026</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="css/style.css?v=20261014_3" rel="stylesheet">
+  <script>
+    (function() {
+      try {
+        const theme = localStorage.getItem("campusconnect_theme") || "light";
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.setAttribute("data-bs-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    :root {
+      --welcome-font: 'Outfit', 'Inter', system-ui, sans-serif;
+      --bg-color: #f8fafc;
+      --text-color: #0f172a;
+    }
+
+    [data-theme="dark"],
+    [data-bs-theme="dark"] {
+      --bg-color: #0b1329;
+      --text-color: #f8fafc;
+    }
+
+    body.welcome-body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: var(--welcome-font);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated background ambient glow */
+    .ambient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ambient-glow-1 {
+      position: absolute;
+      top: -15%;
+      left: 20%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 168, 232, 0.22) 0%, rgba(10, 77, 140, 0.05) 60%, transparent 80%);
+      filter: blur(80px);
+      animation: floatGlow 12s ease-in-out infinite alternate;
+    }
+
+    .ambient-glow-2 {
+      position: absolute;
+      bottom: -10%;
+      right: 15%;
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(147, 51, 234, 0.18) 0%, rgba(56, 189, 248, 0.05) 60%, transparent 80%);
+      filter: blur(80px);
+      animation: floatGlowReverse 14s ease-in-out infinite alternate;
+    }
+
+    [data-theme="dark"] .ambient-glow-1 {
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(30, 58, 138, 0.1) 60%, transparent 80%);
+    }
+
+    [data-theme="dark"] .ambient-glow-2 {
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(59, 130, 246, 0.08) 60%, transparent 80%);
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, 30px) scale(1.08); }
+      100% { transform: translate(-30px, 50px) scale(0.95); }
+    }
+
+    @keyframes floatGlowReverse {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-40px, -30px) scale(1.05); }
+      100% { transform: translate(30px, -40px) scale(0.92); }
+    }
+
+    /* Top bar */
+    .welcome-topbar {
+      position: relative;
+      z-index: 10;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    [data-theme="dark"] .welcome-topbar {
+      background: rgba(15, 23, 42, 0.65);
+    }
+
+    .welcome-main-wrap {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 0 2rem;
+    }
+
+    /* Attractive Website Name Brand Display */
+    .welcome-hero-box {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 3rem auto;
+    }
+
+    .welcome-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      background: rgba(0, 168, 232, 0.08);
+      border: 1px solid rgba(0, 168, 232, 0.25);
+      color: #0284c7;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 168, 232, 0.08);
+    }
+
+    [data-theme="dark"] .welcome-badge-pill {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulseAnim 2s infinite;
+    }
+
+    @keyframes pulseAnim {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 14px #10b981; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    /* The Attractive Website Name Typography */
+    .welcome-brand-name {
+      font-size: clamp(3rem, 7.5vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+      text-shadow: 0 10px 30px rgba(10, 77, 140, 0.15);
+    }
+
+    .brand-text-campus {
+      background: linear-gradient(135deg, #0a4d8c 0%, #0284c7 50%, #00a8e8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .brand-text-connect {
+      background: linear-gradient(135deg, #00a8e8 0%, #6366f1 60%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] .brand-text-campus {
+      background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 40%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 40px rgba(56, 189, 248, 0.35);
+    }
+
+    [data-theme="dark"] .brand-text-connect {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 45px rgba(129, 140, 248, 0.35);
+    }
+
+    .sparkle-icon {
+      font-size: 0.45em;
+      vertical-align: super;
+      color: #f59e0b;
+      display: inline-block;
+      animation: sparkleSpin 4s ease-in-out infinite;
+    }
+
+    @keyframes sparkleSpin {
+      0% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+      50% { transform: scale(1.25) rotate(180deg); opacity: 1; filter: drop-shadow(0 0 8px #f59e0b); }
+      100% { transform: scale(1) rotate(360deg); opacity: 0.8; }
+    }
+
+    .welcome-tagline {
+      font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.25rem;
+    }
+
+    .welcome-tagline span {
+      position: relative;
+      display: inline-block;
+      padding: 0 4px;
+    }
+
+    .welcome-tagline .t-connect { color: #0284c7; }
+    .welcome-tagline .t-participate { color: #6366f1; }
+    .welcome-tagline .t-grow { color: #10b981; }
+
+    [data-theme="dark"] .welcome-tagline .t-connect { color: #38bdf8; }
+    [data-theme="dark"] .welcome-tagline .t-participate { color: #a5b4fc; }
+    [data-theme="dark"] .welcome-tagline .t-grow { color: #34d399; }
+
+    .welcome-desc {
+      font-size: 1.05rem;
+      max-width: 680px;
+      margin: 0 auto 2rem auto;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* Primary Enter Button */
+    .btn-enter-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 38px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #0a4d8c 0%, #00a8e8 100%);
+      color: #ffffff;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(0, 168, 232, 0.35);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-enter-main:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 15px 40px rgba(0, 168, 232, 0.5);
+      color: #ffffff;
+    }
+
+    /* Gateway cards */
+    .gateway-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 1.75rem;
+      text-decoration: none;
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gateway-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #0a4d8c, #00a8e8);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gateway-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.09);
+      border-color: rgba(0, 168, 232, 0.4);
+      color: var(--text-color);
+    }
+
+    .gateway-card:hover::before {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] .gateway-card {
+      background: rgba(15, 23, 42, 0.8);
+      border-color: #334155;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    [data-theme="dark"] .gateway-card:hover {
+      border-color: #38bdf8;
+      box-shadow: 0 16px 40px rgba(56, 189, 248, 0.15);
+    }
+
+    .gateway-icon-wrap {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.25rem;
+      transition: transform 0.3s ease;
+    }
+
+    .gateway-card:hover .gateway-icon-wrap {
+      transform: scale(1.1) rotate(3deg);
+    }
+
+    .icon-student { background: rgba(59, 130, 246, 0.12); color: #2563eb; }
+    .icon-admin { background: rgba(168, 85, 247, 0.12); color: #9333ea; }
+    .icon-cesa { background: rgba(14, 165, 233, 0.12); color: #0284c7; }
+    .icon-calendar { background: rgba(16, 185, 129, 0.12); color: #059669; }
+
+    [data-theme="dark"] .icon-student { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    [data-theme="dark"] .icon-admin { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+    [data-theme="dark"] .icon-cesa { background: rgba(14, 165, 233, 0.2); color: #38bdf8; }
+    [data-theme="dark"] .icon-calendar { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+
+    .gateway-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .gateway-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .gateway-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--primary);
+      transition: gap 0.2s ease;
+    }
+
+    .gateway-card:hover .gateway-action {
+      gap: 10px;
+    }
+
+    /* Live year status strip */
+    .academic-strip {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1rem 1.5rem;
+      margin-top: 2.5rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    }
+  </style>
+</head>
+<body class="welcome-body">
+
+  <!-- Ambient Light Orbs -->
+  <div class="ambient-bg">
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+  </div>
+
+  <!-- Top bar -->
+  <header class="welcome-topbar">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge bg-primary px-2.5 py-1.5 fw-bold rounded-pill">INDUS</span>
+        <span class="small fw-semibold text-muted d-none d-sm-inline">Department of Computer Engineering &bull; CESA</span>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="index.html" class="nav-link fw-bold text-primary small d-flex align-items-center gap-1">
+          <span>Enter Portal</span> <i class="bi bi-arrow-right"></i>
+        </a>
+        <button class="theme-toggle-btn" title="Toggle theme"><i class="bi bi-moon-stars-fill"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Welcome Stage -->
+  <main class="welcome-main-wrap">
+    <div class="container">
+      
+      <!-- Attractively Rendered Website Name Section -->
+      <div class="welcome-hero-box">
+        <div class="welcome-badge-pill">
+          <span class="pulse-dot"></span>
+          <span>Official Portal &bull; Indus University &bull; Academic Year 2026</span>
+        </div>
+
+        <h1 class="welcome-brand-name">
+          <span class="brand-text-campus">Campus</span><span class="brand-text-connect">Connect</span>
+          <span class="sparkle-icon"><i class="bi bi-stars"></i></span>
+        </h1>
+
+        <div class="welcome-tagline">
+          <span class="t-connect">Connect.</span> &bull; 
+          <span class="t-participate">Participate.</span> &bull; 
+          <span class="t-grow">Grow.</span>
+        </div>
+
+        <p class="welcome-desc">
+          Welcome to CampusConnect &mdash; the centralized digital hub for <strong>CESA (Computer Engineering Students Association)</strong> hackathons, university seminars, sports tournaments, participation passes, and verified student credentials.
+        </p>
+
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a href="index.html" class="btn-enter-main">
+            <span>Explore Campus Portal</span>
+            <i class="bi bi-arrow-right-circle-fill fs-5"></i>
+          </a>
+          <a href="calendar.html" class="btn btn-outline-primary rounded-pill px-4 py-3 fw-bold d-inline-flex align-items-center gap-2">
+            <i class="bi bi-calendar3"></i>
+            <span>Calendar 2026</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Portal Gateway Cards -->
+      <div class="row g-4">
+        
+        <!-- Student Portal -->
+        <div class="col-md-6 col-lg-3">
+          <a href="login.html" class="gateway-card">
+            <div>
+              <div class="gateway-icon-wrap icon-student">
+                <i class="bi bi-person-workspace"></i>
+              </div>
+              <h5 class="gateway-title">Student Portal</h5>
+              <p class="gateway-desc">
+                Sign in to view registered hackathons, generate event entry passes, and download verified certificates.
+              </p>
+            </div>
+            <div class="gateway-action">
+              <span>Student Sign In</span>
+              <i class="bi bi-arrow-right"></i>
+            </div>
+          </a>
+        </div>
+
+        <!-- Admin Control Center -->
+        <div class="col-md-6 col-lg-3">
+          <a href="admin.html" class="gateway-card">
+            <div>
+              <div class="gateway-icon-wrap icon-admin">
+                <i class="bi bi-shield-lock-fill"></i>
+              </div>
+              <h5 class="gateway-title">Admin Panel</h5>
+              <p class="gateway-desc">
+                Administrative control for CESA advisors to publish events, track registrations, and manage database records.
+              </p>
+            </div>
+            <div class="gateway-action">
+              <span>Admin Control</span>
+              <i class="bi bi-arrow-right"></i>
+            </div>
+          </a>
+        </div>
+
+        <!-- CESA Hub -->
+        <div class="col-md-6 col-lg-3">
+          <a href="cesa.html" class="gateway-card">
+            <div>
+              <div class="gateway-icon-wrap icon-cesa">
+                <i class="bi bi-cpu-fill"></i>
+              </div>
+              <h5 class="gateway-title">CESA Technical Hub</h5>
+              <p class="gateway-desc">
+                Explore CodeSprint hackathon, AI workshops, executive committee members, and departmental innovations.
+              </p>
+            </div>
+            <div class="gateway-action">
+              <span>Explore CESA</span>
+              <i class="bi bi-arrow-right"></i>
+            </div>
+          </a>
+        </div>
+
+        <!-- Calendar 2026 -->
+        <div class="col-md-6 col-lg-3">
+          <a href="calendar.html" class="gateway-card">
+            <div>
+              <div class="gateway-icon-wrap icon-calendar">
+                <i class="bi bi-calendar-event-fill"></i>
+              </div>
+              <h5 class="gateway-title">2026 Event Calendar</h5>
+              <p class="gateway-desc">
+                Schedule of upcoming flagship technical rounds, expert seminars, box cricket leagues, and cultural festivals.
+              </p>
+            </div>
+            <div class="gateway-action">
+              <span>View 2026 Calendar</span>
+              <i class="bi bi-arrow-right"></i>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Live Academic Year & Tech Stack Strip -->
+      <div class="academic-strip d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-1 rounded-pill fw-bold">
+            <i class="bi bi-check-circle-fill me-1"></i> Academic Year 2026 Active
+          </span>
+          <span class="small text-muted">&bull; Indus University Computer Engineering Department</span>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap small">
+          <span class="badge bg-light text-dark border"><i class="bi bi-code-slash text-warning"></i> HTML5 &bull; CSS3</span>
+          <span class="badge bg-light text-dark border"><i class="bi bi-filetype-js text-warning"></i> Vanilla JS &bull; AngularJS 1.8</span>
+          <span class="badge bg-light text-dark border"><i class="bi bi-filetype-php text-primary"></i> PHP 8.2 &bull; MySQL</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer py-3 border-top" style="position:relative;z-index:2;">
+    <div class="container text-center small text-muted">
+      <p class="mb-0">&copy; 2026 CampusConnect &bull; Indus University &bull; CESA Web Technology Project</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Mark that the user legitimately entered from the Welcome page
+    document.querySelectorAll('a[href*="index.html"], a.btn-enter-main, a.gateway-card').forEach(el => {
+      el.addEventListener('click', () => {
+        try {
+          sessionStorage.setItem('campusconnect_from_welcome', '1');
+        } catch (e) {}
+      });
+    });
+  </script>
+</body>
+</html>

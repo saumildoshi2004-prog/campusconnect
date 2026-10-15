@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CESA Hub | CampusConnect — Indus University</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="css/style.css?v=20261014_3" rel="stylesheet">
+  <script>
+    (function() {
+      try {
+        const theme = localStorage.getItem("campusconnect_theme") || "light";
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.setAttribute("data-bs-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- Academic Tech Matrix Top HUD -->
+  <div class="tech-stack-strip">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-none d-md-flex align-items-center">
+        <span class="tech-pill"><i class="bi bi-code-slash text-warning"></i> HTML5</span>
+        <span class="tech-pill"><i class="bi bi-palette text-info"></i> CSS3</span>
+        <span class="tech-pill active-php"><i class="bi bi-filetype-php"></i> PHP 8.2</span>
+        <span class="tech-pill"><i class="bi bi-filetype-js text-warning"></i> JavaScript</span>
+        <span class="tech-pill active-ng"><i class="bi bi-shield-shaded"></i> AngularJS 1.8</span>
+        <span class="tech-pill active-sql"><i class="bi bi-database"></i> Database (SQL)</span>
+      </div>
+      <div class="ms-auto d-flex align-items-center gap-2">
+        <span class="db-live-indicator">Checking Database...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ultra-Modern Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-campus sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <span class="d-inline-flex align-items-center me-1">
+          <i class="bi bi-mortarboard-fill text-primary me-1 fs-5"></i>
+        </span>
+        <span>Campus</span>Connect <span class="brand-badge">INDUS</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMain">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link cesa-highlight active" href="cesa.html"><i class="bi bi-stars"></i> CESA Hub</a></li>
+          <li class="nav-item"><a class="nav-link" href="seminars.html"><i class="bi bi-easel"></i> Seminars</a></li>
+          <li class="nav-item"><a class="nav-link" href="events.html"><i class="bi bi-lightning-charge"></i> Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="announcements.html"><i class="bi bi-megaphone"></i> Notices</a></li>
+          <li class="nav-item"><a class="nav-link" href="calendar.html"><i class="bi bi-calendar3"></i> Calendar</a></li>
+          <li class="nav-item" id="nav-about"><a class="nav-link" href="about.html"><i class="bi bi-info-circle"></i> About</a></li>
+          <li class="nav-item" id="nav-database"><a class="nav-link" href="db_status.html"><i class="bi bi-database"></i> Database</a></li>
+          <li class="nav-item" id="nav-login"><a class="nav-link" href="login.html"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
+          <li class="nav-item" id="nav-dashboard" style="display:none;"><a class="nav-link" href="dashboard.html"><i class="bi bi-speedometer2 me-1"></i>Dashboard</a></li>
+          <li class="nav-item" id="nav-logout" style="display:none;"><a class="nav-link text-danger-emphasis" href="#" onclick="Auth.logout()"><i class="bi bi-box-arrow-right me-1"></i>Logout</a></li>
+          <li class="nav-item ms-lg-2">
+            <button class="theme-toggle-btn" title="Toggle theme"><i class="bi bi-moon-stars-fill"></i></button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CESA Signature Hero Banner -->
+  <section class="cesa-banner">
+    <div class="container position-relative" style="z-index: 5;">
+      <div class="d-inline-flex align-items-center gap-2 bg-white bg-opacity-10 px-3 py-1.5 rounded-pill mb-3 border border-white border-opacity-20 shadow-sm">
+        <i class="bi bi-patch-check-fill text-warning"></i>
+        <span class="small fw-bold letter-spacing-1">Signature Student Body &bull; Indus University</span>
+      </div>
+      <h1 class="display-3 fw-bold mb-2" style="font-family: var(--font-display); letter-spacing: -1.5px;">
+        CESA <span style="font-size:0.45em; vertical-align: super; color: #fbbf24;"><i class="bi bi-stars"></i></span>
+      </h1>
+      <p class="fs-4 mb-3 text-info fw-semibold" style="font-family: var(--font-display); letter-spacing: -0.3px;">
+        Computer Engineering Students Association
+      </p>
+      <p class="mb-4 opacity-90 lead" style="max-width: 720px; line-height: 1.7;">
+        Empowering Computer Engineering students through hands-on technical hackathons, industry networking, peer coding workshops, and leadership development at Indus University.
+      </p>
+      <div class="d-flex gap-3 flex-wrap align-items-center">
+        <a href="#events" class="btn btn-hero btn-hero-accent"><i class="bi bi-lightning-charge-fill"></i> View CESA Events</a>
+        <a href="#committee" class="btn btn-hero btn-hero-outline"><i class="bi bi-people"></i> Executive Committee</a>
+        <a href="#about-bento" class="btn btn-hero btn-hero-outline"><i class="bi bi-compass"></i> Vision &amp; Mission</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CESA Overview & Bento Grid Section -->
+  <section class="section-padding" id="about-bento">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-8">
+          <span class="section-badge"><i class="bi bi-info-circle"></i> Association Foundation</span>
+          <h2 class="section-title">About CESA</h2>
+          <div class="divider"></div>
+          <p class="lead mb-4 text-muted" id="cesa-intro">
+            CESA is the primary student association for Computer Engineering students at Indus University. It organizes technical events, workshops, competitions and fosters a culture of learning and leadership.
+          </p>
+
+          <!-- Vision & Mission Bento Cards -->
+          <div class="row g-4 mt-1">
+            <div class="col-md-6">
+              <div class="card card-modern p-4 h-100 border-start border-4 border-start-primary">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <div class="stat-icon-wrap mb-0" style="width:42px;height:42px;border-radius:10px;">
+                    <i class="bi bi-eye fs-5"></i>
+                  </div>
+                  <h5 class="fw-bold mb-0" style="font-family: var(--font-display);">Our Vision</h5>
+                </div>
+                <p class="mb-0 small text-muted" id="cesa-vision" style="line-height: 1.7;"></p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card card-modern p-4 h-100 border-start border-4 border-start-info">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <div class="stat-icon-wrap mb-0" style="width:42px;height:42px;border-radius:10px;background:rgba(6,182,212,0.12);color:#06b6d4;">
+                    <i class="bi bi-bullseye fs-5"></i>
+                  </div>
+                  <h5 class="fw-bold mb-0" style="font-family: var(--font-display);">Our Mission</h5>
+                </div>
+                <p class="mb-0 small text-muted" id="cesa-mission" style="line-height: 1.7;"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Objectives -->
+          <div class="card card-modern p-4 mt-4">
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <i class="bi bi-check2-circle text-primary fs-4"></i>
+              <h4 class="fw-bold mb-0" style="font-family: var(--font-display);">Key Strategic Objectives</h4>
+            </div>
+            <ul class="list-group list-group-flush" id="cesa-objectives"></ul>
+          </div>
+
+          <!-- Flagship Activities -->
+          <div class="card card-modern p-4 mt-4">
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <i class="bi bi-lightning-charge-fill text-warning fs-4"></i>
+              <h4 class="fw-bold mb-0" style="font-family: var(--font-display);">Flagship Student Activities</h4>
+            </div>
+            <div class="d-flex flex-wrap gap-2" id="cesa-activities"></div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card card-modern p-4 sticky-top" style="top:100px;">
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <i class="bi bi-bookmark-star-fill text-primary fs-4"></i>
+              <h5 class="fw-bold mb-0" style="font-family: var(--font-display);">CESA Quick Hub</h5>
+            </div>
+            <div class="list-group list-group-flush mb-4">
+              <a href="#events" class="list-group-item list-group-item-action border-0 px-0 py-2.5 d-flex align-items-center justify-content-between">
+                <span><i class="bi bi-calendar-event me-2 text-primary"></i> CESA Events</span>
+                <i class="bi bi-chevron-right small text-muted"></i>
+              </a>
+              <a href="#committee" class="list-group-item list-group-item-action border-0 px-0 py-2.5 d-flex align-items-center justify-content-between">
+                <span><i class="bi bi-people me-2 text-primary"></i> Executive Committee</span>
+                <i class="bi bi-chevron-right small text-muted"></i>
+              </a>
+              <a href="events.html" class="list-group-item list-group-item-action border-0 px-0 py-2.5 d-flex align-items-center justify-content-between">
+                <span><i class="bi bi-lightning-charge me-2 text-primary"></i> Live Event Explorer</span>
+                <i class="bi bi-chevron-right small text-muted"></i>
+              </a>
+              <a href="seminars.html" class="list-group-item list-group-item-action border-0 px-0 py-2.5 d-flex align-items-center justify-content-between">
+                <span><i class="bi bi-mic me-2 text-primary"></i> University Seminars</span>
+                <i class="bi bi-chevron-right small text-muted"></i>
+              </a>
+              <a href="calendar.html" class="list-group-item list-group-item-action border-0 px-0 py-2.5 d-flex align-items-center justify-content-between">
+                <span><i class="bi bi-calendar3 me-2 text-primary"></i> 2026 Calendar</span>
+                <i class="bi bi-chevron-right small text-muted"></i>
+              </a>
+            </div>
+            <div class="p-3 rounded-3 bg-light border">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-building text-primary"></i>
+                <h6 class="fw-bold mb-0 small">Department Affiliation</h6>
+              </div>
+              <p class="small text-muted mb-0">Department of Computer Engineering, Indus Institute of Technology &amp; Engineering, Indus University, Ahmedabad.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CESA Events Section -->
+  <section class="section-padding bg-light border-top border-bottom" id="events">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+        <div>
+          <span class="section-badge"><i class="bi bi-stars"></i> Exclusive CESA Calendar</span>
+          <h2 class="section-title mb-0">CESA Activities &amp; Competitions</h2>
+          <p class="section-subtitle mb-0">Coding challenges, national hackathons, and technical workshops</p>
+        </div>
+        <div class="filter-bar mb-0">
+          <button class="filter-btn active" data-cat="all"><i class="bi bi-grid-fill"></i> All</button>
+          <button class="filter-btn" data-cat="Competition"><i class="bi bi-trophy"></i> Competitions</button>
+          <button class="filter-btn" data-cat="Workshop"><i class="bi bi-gear-fill"></i> Workshops</button>
+        </div>
+      </div>
+      <div class="row" id="cesa-events-list"></div>
+    </div>
+  </section>
+
+  <!-- Committee Section -->
+  <section class="section-padding" id="committee">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="section-badge"><i class="bi bi-people-fill"></i> Student Leadership</span>
+        <h2 class="section-title">CESA Executive Committee</h2>
+        <p class="section-subtitle mx-auto">Dedicated student leaders steering technology initiatives and fests at Indus University</p>
+      </div>
+      <div class="row g-4" id="committee-list"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2026 CampusConnect &bull; CESA Indus University &bull; Computer Engineering Department &bull; Web Technology Project</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/html2pdf.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cesa = CampusData.cesa;
+      document.getElementById("cesa-vision").textContent = cesa.vision;
+      document.getElementById("cesa-mission").textContent = cesa.mission;
+      document.getElementById("cesa-objectives").innerHTML = cesa.objectives.map(o => `
+        <li class="list-group-item bg-transparent px-0 py-2.5 d-flex align-items-start gap-2">
+          <i class="bi bi-check-circle-fill text-success fs-5 mt-0.5"></i>
+          <span>${o}</span>
+        </li>
+      `).join("");
+      document.getElementById("cesa-activities").innerHTML = cesa.activities.map(a => `
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 fs-6 fw-semibold rounded-pill">${a}</span>
+      `).join("");
+
+      // Render CESA Events
+      const events = Storage.get("cesaEvents", []);
+      const eventsList = document.getElementById("cesa-events-list");
+      function renderEvents(cat = "all") {
+        const filtered = cat === "all" ? events : events.filter(e => e.category === cat);
+        eventsList.innerHTML = filtered.map(e => UI.createEventCard(e, "cesa")).join("") || "<p class='text-muted py-4'>No events found in this category.</p>";
+      }
+      renderEvents();
+
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          renderEvents(btn.dataset.cat);
+        });
+      });
+
+      // Render Committee
+      const committee = Storage.get("committee", []);
+      document.getElementById("committee-list").innerHTML = committee.map(m => UI.createCommitteeCard(m)).join("");
+    });
+  </script>
+</body>
+</html>
